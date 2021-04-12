@@ -14,11 +14,12 @@ A high-end baby monitor for worried parents. The monitor will stream a feed of t
 ## Raspberry Pi 3
 To setup the camera first user must enable it on the Pi by going to **Preferences->Raspberry Pi Configuration-> Interfaces**
 
-Terminal:
+Then in the terminal type in:
 ```
-nano rpi_camera_surveillance_system.py
+nano rpi_camera_baby_monitior.py
 
 ```
+Once in the file copy paste in the camera code in the pi file
 
 ## Mbed
 words
