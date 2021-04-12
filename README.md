@@ -16,3 +16,7 @@ words
 
 ## Mbed
 words
+| Mbed  | part |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
