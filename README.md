@@ -9,3 +9,10 @@ A high-end baby monitor for worried parents. The monitor will stream a feed of t
 - HC-SR04 Sonar Sensor
 - MEMS Microphone
 - Speaker - PCB Mount
+
+# How It Works
+## Raspberry Pi 3
+words
+
+## Mbed
+words
