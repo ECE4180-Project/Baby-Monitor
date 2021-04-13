@@ -16,10 +16,19 @@ To setup the camera first user must enable it on the Pi by going to **Preference
 
 Then in the terminal type in:
 ```
-nano rpi_camera_baby_monitior.py
-
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install apache2 -y
+cd /var/www/html 
+ls -al 
+sudo chown pi: index.html
+sudo nano index.html
 ```
 Once in the file copy paste in the camera code in the pi file
+to get to webpage
+```
+sudo service apache2 status
+```
 
 ## Mbed
 words
