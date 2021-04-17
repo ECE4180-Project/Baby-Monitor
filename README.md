@@ -14,21 +14,25 @@ A high-end baby monitor for worried parents. The monitor will stream a feed of t
 ## Raspberry Pi 3
 To setup the camera first user must enable it on the Pi by going to **Preferences->Raspberry Pi Configuration-> Interfaces**
 
-Then in the terminal type in:
+Next download the opencv in order to run the camera
 ```
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt install apache2 -y
-cd /var/www/html 
-ls -al 
-sudo chown pi: index.html
-sudo nano index.html
+sudo apt-get install libhdf5-dev libhdf5-serial-dev
+sudo apt-get install python3-h5py
+sudo apt-get install libqtgui4 libqtwebkit4 libqt4-test python3-pyqt5
+sudo apt-get install libatlas-base-dev
+sudo apt-get install libjasper-dev
+sudo apt-get install -y libatlas-base-dev libhdf5-dev libhdf5-serial-dev libatlas-base-dev libjasper-dev libqtgui4 libqt4-test
+sudo pip3 install opencv-contrib-python==3.4.4.19
 ```
-Once in the file copy paste in the camera code in the pi file
-to get to webpage
+To run the camera and launch the server use this code
 ```
-sudo service apache2 status
+python3 main.py
 ```
+Once the server is running you can view the everything by going to ip:9000
+```
+http://111.111.1.1:9000
+```
+
 
 ## Mbed
 words
