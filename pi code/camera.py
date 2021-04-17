@@ -1,22 +1,40 @@
-from flask import Flask, render_template, Response
-# Raspberry Pi camera module (requires picamera package, developed by Miguel Grinberg)
-from camera_pi import Camera
-app = Flask(__name__)
-@app.route('/')
-def index():
-    """Video streaming home page."""
-    return render_template('index.html')
-def gen(camera):
-    """Video streaming generator function."""
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-@app.route('/video_feed')
-def video_feed():
-    """Video streaming route. Put this in the src attribute of an img tag."""
-    return Response(gen(Camera()),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port =80, debug=True, threaded=True)
+# Part 01 using opencv access webcam and transmit the video in HTML
+import cv2
+import pyshine as ps #  pip3 install pyshine==0.0.9
+HTML="""
+<html>
+<head>
+<title>Baby Monitor</title>
+</head>
+
+<body>
+<center><h1> Streaming Baby </h1></center>
+<center><img src="stream.mjpg" width='640' height='480' autoplay playsinline></center>
+</body>
+</html>
+"""
+#<center><img src="stream.mjpg" width='640' height='480' autoplay playsinline></center>
+def main():
+    StreamProps = ps.StreamProps
+    StreamProps.set_Page(StreamProps,HTML)
+    address = ('127.0.0.1',9000) # Enter your IP address 
+    try:
+        StreamProps.set_Mode(StreamProps,'cv2')
+        capture = cv2.VideoCapture(0)
+        capture.set(cv2.CAP_PROP_BUFFERSIZE,4)
+        capture.set(cv2.CAP_PROP_FRAME_WIDTH,320)
+        capture.set(cv2.CAP_PROP_FRAME_HEIGHT,240)
+        capture.set(cv2.CAP_PROP_FPS,30)
+        StreamProps.set_Capture(StreamProps,capture)
+        StreamProps.set_Quality(StreamProps,90)
+        server = ps.Streamer(address,StreamProps)
+        print('Server started at','http://'+address[0]+':'+str(address[1]))
+        server.serve_forever()
+        
+    except KeyboardInterrupt:
+        capture.release()
+        server.socket.close()
+        
+if __name__=='__main__':
+    main()
     
