@@ -13,6 +13,7 @@ A high-end baby monitor for worried parents. The monitor will stream a feed of t
 # How It Works
 ## Raspberry Pi 3
 To setup the camera first user must enable it on the Pi by going to **Preferences->Raspberry Pi Configuration-> Interfaces**
+then reboot the camera
 
 Next download the opencv in order to run the camera
 ```
