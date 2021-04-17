@@ -27,7 +27,7 @@ sudo pip3 install opencv-contrib-python==3.4.4.19
 ```
 To run the camera and launch the server use this code
 ```
-python3 main.py
+python3 camera.py
 ```
 Once the server is running you can view the everything by going to ip:9000
 ```
