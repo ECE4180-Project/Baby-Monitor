@@ -13,7 +13,7 @@ A high-end baby monitor for worried parents. The monitor will stream a feed of t
 - Speaker - PCB Mount
 
 # How It Works
-## Camera and audio Setup 
+## Camera Setup 
 Both the caream and audio is run through the a wbesever streamed to the parents
 To setup the camera first user must enable it on the Pi by going to **Preferences->Raspberry Pi Configuration-> Interfaces**
 then reboot the Pi
