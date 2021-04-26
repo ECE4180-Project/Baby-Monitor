@@ -1,6 +1,8 @@
 # Baby-Monitor
-######  by Erobhosele Sado, Sidney Wise, Jack Darrow, and  Ben Nixon                                                                                                     
-A high-end baby monitor for worried parents. The monitor will stream a feed of the baby(using the pi camera), check in on its movements(using sonar sensors), listen out for cries(using microphone), and allow parents to speak to their child from another room(using the speaker).
+######  by Erobhosele Sado, Sidney Wise, Jack Darrow, and  Ben Nixon  
+
+## Summary
+A high-end baby monitor for worried parents. The monitor will stream a feed of the baby, check in on its movements, listen out for cries, and allow parents to speak to their child.
 
 ## Parts
 - Raspberry Pi 3 
@@ -46,3 +48,9 @@ The baby's movement is tracked using the HC-SR04 Sonar Sensor
 | echo | pin 18  |
 
 Once connected the *place description for sonar*
+
+## Video Demo
+ggg
+
+## Presentation
+ggg
