@@ -49,6 +49,10 @@ The baby's movement is tracked using the HC-SR04 Sonar Sensor
 
 Once connected the *place description for sonar*
 
+## Run the code altogether 
+```
+Blah
+```
 ## Video Demo
 ggg
 
