@@ -45,3 +45,4 @@ The baby's movement is tracked using the HC-SR04 Sonar Sensor
 | trig | pin 17 |
 | echo | pin 18  |
 
+Once connected the *place description for sonar*
