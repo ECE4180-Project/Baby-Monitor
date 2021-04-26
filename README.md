@@ -11,10 +11,10 @@ A high-end baby monitor for worried parents. The monitor will stream a feed of t
 - Speaker - PCB Mount
 
 # How It Works
-## Raspberry Pi 3
+## Camera and audio Setup 
+Both the caream and audio is run through the a wbesever streamed to the parents
 To setup the camera first user must enable it on the Pi by going to **Preferences->Raspberry Pi Configuration-> Interfaces**
-then reboot the camera
-
+then reboot the Pi
 Next download the opencv in order to run the camera
 ```
 sudo apt-get install libhdf5-dev libhdf5-serial-dev
@@ -26,7 +26,7 @@ sudo apt-get install -y libatlas-base-dev libhdf5-dev libhdf5-serial-dev libatla
 sudo pip3 install opencv-contrib-python==3.4.4.19
 pip3 install pyshine==0.0.9
 ```
-To run the camera and launch the server use this code
+To run the camera, audio and launch the server use this code
 ```
 python3 camera.py
 ```
@@ -34,11 +34,14 @@ Once the server is running you can view the everything by going to ip:9000
 ```
 http://111.111.1.1:9000
 ```
+## Baby Motion trakcking
 
+The baby's movement is tracked using the HC-SR04 Sonar Sensor
 
-## Mbed
-words
-| Mbed  | part |
+| Sonar  | Raspberry pi |
 | ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| Vcc  | 5V |
+| Gnd | Gnd |
+| trig | pin 17 |
+| echo | pin 18  |
+
