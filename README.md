@@ -1,4 +1,4 @@
-# Baby-Monitor
+# Baby Monitor
 ######  by Erobhosele Sado, Sidney Wise, Jack Darrow, and  Ben Nixon  
 
 ## Summary
