@@ -6,11 +6,10 @@ A high-end baby monitor for worried parents. The monitor will stream a feed of t
 
 ## Parts
 - Raspberry Pi 3 
-- Mbed
 - Raspberry Pi NoIR Camera V2
 - HC-SR04 Sonar Sensor
-- MEMS Microphone
-- Speaker - PCB Mount
+- USB Microphone
+- Speaker 
 
 # How It Works
 ## Camera & Server Setup 
