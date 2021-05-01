@@ -12,15 +12,14 @@ A high-end baby monitor for worried parents. The monitor will stream a feed of t
 - Speaker 
 
 # How It Works
-## Camera & Server Setup 
+## Camera, Recorder & Server Setup 
 To setup the camera first user must enable it on the Pi by going to **Preferences->Raspberry Pi Configuration-> Interfaces**
 then reboot the Pi
-Next download these modules in order to run the camera and server
+Next download these modules in order to run the camera, recorder, and server
 ```
-pip install flask
-pip install numpy
-pip install opencv-contrib-python
-pip install imutils
+sudo apt-get install python3-flask
+pip install -U -r requirements.txt
+openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
 
 ```
 To launch the server use this code
