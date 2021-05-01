@@ -43,7 +43,10 @@ The baby's movement is tracked using the HC-SR04 Sonar Sensor
 | trig | pin 17 |
 | echo | pin 18  |
 
-Once connected the FilterVersion2.cpp code will run the sonar and send its data to the server
+The sonar data is avreaged and has its standard deviation taken. 
+If the distance is greater than the average plus two times the standard deviation or
+less than the average minus two imes the standard deviation. 
+The disrbance count is up signifying that the baby is moving.
 
 ## Speaking to the baby
 Parents can talk to the baby thanks to the config file code in Microphone and SPeaker setup+connection.
