@@ -13,28 +13,24 @@ A high-end baby monitor for worried parents. The monitor will stream a feed of t
 - Speaker - PCB Mount
 
 # How It Works
-## Camera Setup 
-Both the caream and audio is run through the a wbesever streamed to the parents
+## Camera & Server Setup 
 To setup the camera first user must enable it on the Pi by going to **Preferences->Raspberry Pi Configuration-> Interfaces**
 then reboot the Pi
-Next download the opencv in order to run the camera
+Next download these modules in order to run the camera and server
 ```
-sudo apt-get install libhdf5-dev libhdf5-serial-dev
-sudo apt-get install python3-h5py
-sudo apt-get install libqtgui4 libqtwebkit4 libqt4-test python3-pyqt5
-sudo apt-get install libatlas-base-dev
-sudo apt-get install libjasper-dev
-sudo apt-get install -y libatlas-base-dev libhdf5-dev libhdf5-serial-dev libatlas-base-dev libjasper-dev libqtgui4 libqt4-test
-sudo pip3 install opencv-contrib-python==3.4.4.19
-pip3 install pyshine==0.0.9
+pip install flask
+pip install numpy
+pip install opencv-contrib-python
+pip install imutils
+
 ```
-To run the camera, audio and launch the server use this code
+To launch the server use this code
 ```
-python3 camera.py
+python webstreaming.py --ip 0.0.0.0 --port 8000
 ```
 Once the server is running you can view the everything by going to ip:9000
 ```
-http://111.111.1.1:9000
+http://0.0.0.0:8000
 ```
 ## Baby Motion trakcking
 
@@ -47,12 +43,12 @@ The baby's movement is tracked using the HC-SR04 Sonar Sensor
 | trig | pin 17 |
 | echo | pin 18  |
 
-Once connected the *place description for sonar*
+Once connected the FilterVersion2.cpp code will run the sonar and send its data to the server
 
-## Run the code altogether 
-```
-Blah
-```
+## Speaking to the baby
+Parents can talk to the baby thanks to the config file code in Microphone and SPeaker setup+connection.
+
+
 ## Video Demo
 ggg
 
