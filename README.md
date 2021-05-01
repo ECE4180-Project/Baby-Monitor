@@ -24,11 +24,11 @@ openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 36
 ```
 To launch the server use this code
 ```
-python webstreaming.py --ip 0.0.0.0 --port 8000
+flask run
 ```
 Once the server is running you can view the everything by going to ip:9000
 ```
-http://0.0.0.0:8000
+http://000.000.0.0:8000
 ```
 ## Baby Motion trakcking
 
