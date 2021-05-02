@@ -12,6 +12,14 @@ A high-end baby monitor for worried parents. The monitor will stream a feed of t
 - Speaker 
 
 # How It Works
+
+## Setting up the hardware
+- Connect the HC-SR04 Sonar Sensor to the Raspberry Pi 3
+    - The HC-SR04 is powered using the Arduino Uno's 5V and GND pins, and operates using two GPIO pins. The two GPIO pins used in this process are GPIO pins 14 and 15.
+    - The schematic below shows how to connect the HC-SR04 sensor using male to female dual head jumper wires.
+- Connect the Raspberry Pi to a monitor or display. For this instance, the Pi was connected to a monitor using HDMI.
+- Connect a USB keyboard and mouse to the Pi.
+- Attach a speaker to the Pi through the 2.1mm headphone jack.
 ## Camera, Recorder & Server Setup 
 To setup the camera first user must enable it on the Pi by going to **Preferences->Raspberry Pi Configuration-> Interfaces**
 then reboot the Pi
