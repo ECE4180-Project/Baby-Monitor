@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+
+<script type="text/javascript">
+    
+    navigator.getUserMedia = navigator.getUserMedia ||navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    
+    var aCtx;
+    var analyser;
+    var microphone;
+    if (navigator.getUserMedia) {
+      navigator.getUserMedia(
+        {audio: true}, 
+        function(stream) {
+          aCtx = new AudioContext();
+          microphone = aCtx.createMediaStreamSource(stream);
+          var destination=aCtx.destination;
+          microphone.connect(destination);
+        },
+        function(){ console.log("Error 003.")}
+      );
+    }
+        
+  </script>
+      
+      
+      
+    <meta charset="UTF-8">
+    <title>Baby Surveillance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <h1>Baby Surveillance</h1>
+    <p> Hit record to make a message for baby and press stop  to send </p>
+    <div id="controls">
+  	 <button id="recordButton">Record</button>
+  	 <button id="pauseButton" disabled>Pause</button>
+  	 <button id="stopButton" disabled>Stop</button>
+    </div>
+    <div id="formats">Format: start recording to see sample rate</div>
+  	<!--<p><strong>Recordings:</strong></p>-->
+  	<!--<ol id="recordingsList"></ol>-->
+    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+  	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+  	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <h3><img src="{{ url_for('video_feed') }}" width="80%"></h3>
+   
+    <p> Baby's Movement: {{variable}}</p>
+  </body>
+</html>
