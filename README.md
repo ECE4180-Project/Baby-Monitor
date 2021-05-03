@@ -135,10 +135,39 @@ flask run --cert=cert.pem --key=key.pem
 - This disturbance count value is then written to the standard output stream, and the data measurement and analysis process starts again.
 - This process is completed once every 0.25 seconds indefinitely.
 - In order to prevent the initial startup of the sensor from generating false disturbances, there is logic in place to prevent the disturbance count value from being incremented until 125 measurements have been taken.
-## Speaking to the baby
-Parents can talk to the baby thanks to the config file code in Microphone and SPeaker setup+connection.
-
-
+## Starting the Server
+- Flask is used to create the server.
+- Flask is a Python module that makes developing web applications simple and easy.
+- You can learn more about Flask and see basic server setups at https://flask.palletsprojects.com/en/1.1.x/
+- Like all Flask servers, our server starts off by instantiating the app in the main Python file called "app.py."
+  ```
+   from flask import Flask
+   app = Flask(__name__)
+  ```
+- After the instantiation, various functions and app routes are implemented that will be discussed later.
+- At the end of "app.py," the server starts when teh following segment of code runs.
+  ```
+   if __name__=='__main':
+   	if not os.path.exists(directory):
+		os.makedirs(BASE_DIR)
+	app.run(host = '0.0.0.0', ssl_context=('cert.pem', 'key.pem'), debug = False)
+  ```
+- Flask applications use a file structure to organize different files. The figure below shows the file structure for our project.
+## Streaming the Camera
+- To stream the camera, we will be using Marcelo Rovai's camera class. This class can be found on his GitHub at https://github.com/Mjrovai/Video-Streaming-with-Flask/blob/master/camWebServer/camera_pi.py
+- We also implement several app routes and functions in "app.py" that Marcelo has developed for streaming a Pi camera to a server.
+	- The "gen" function is used to countinously grab frames from the cameraand the 'video_feed' app route is used to route this stream to the server page.
+- Now that we have the Python code in place to stream the camera, we can add it to our server page by altering the "index.html" file.
+	- In the body of the "index.html" file, add the image source.
+  ```
+   <h3><img src="{{ url_for('video_feed') }}" width = 80%></h3>
+  ```
+- Changing the percentage value in the line above will adjust the size of the video window on the server page.
+## Sending Audio from the Parent's Device to the Baby Monitor
+- To stream audio from the Parent's device to the baby monitor, a modified version of AddPipe's simplerecorder application developed using Matt Diamond's recorder.js Javascript Plugin. You can find AddPipe's application at the following link: https://github.com/addpipe/simple-recorderjs-demo
+- The Javascript code used for recording audio from the parent and sending to the monitor can be found in the "app.js" file.
+- With "app.js" in the javascript file directory, we can add functions and app routes to the main Python program "app.py."
+	
 ## Video Demo
 ggg
 
