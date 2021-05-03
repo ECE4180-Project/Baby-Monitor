@@ -51,15 +51,14 @@ flask run --cert=cert.pem --key=key.pem
 <p align="center">
   HCSR04 from Sparkfun
 </p>
-- The baby's movement is tracked using the HC-SR04 Sonar Sensor
-- The sonar operates by sending out a pulse and then measuring how long it takes for the entire pulse to bounce off an object an return to the sensor.
-- The time it takes for the pulse to bounce off an object and return is dependent upon how far away the object is.
-<p align="center>
-  <img src="https://static.javatpoint.com/tutorial/arduino/images/arduino-ultrasonic-distance-sensor4.png" width=30% height=30% >
+
+- The baby's movement is tracked using the HC-SR04 Sonar Sensor.  
+- The sonar operates by sending out a pulse and then measuring how long it takes for the entire pulse to bounce off an object an return to the sensor.  
+- The time it takes for the pulse to bounce off an object and return is dependent upon how far away the object is.  
+
+<p align="center">
+  <img src="https://github.com/ECE4180-Project/Baby-Monitor/blob/420617f118cf526631bc26cf15c79aee5247c440/arduino-ultrasonic-distance-sensor4.png" width=50% height=50% >
 </p>
-
-
-
 
 | Sonar  | Raspberry pi |
 | ------------- | ------------- |
