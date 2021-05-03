@@ -4,6 +4,11 @@
 ## Summary
 A high-end baby monitor for worried parents. The monitor will stream a feed of the baby, check in on its movements, listen out for cries, and allow parents to speak to their child.
 
+## Video Demo
+ggg
+
+## Presentation
+ggg
 ## Parts
 - Raspberry Pi 3 
 - MicroUSB cable
@@ -135,6 +140,41 @@ flask run --cert=cert.pem --key=key.pem
 - This disturbance count value is then written to the standard output stream, and the data measurement and analysis process starts again.
 - This process is completed once every 0.25 seconds indefinitely.
 - In order to prevent the initial startup of the sensor from generating false disturbances, there is logic in place to prevent the disturbance count value from being incremented until 125 measurements have been taken.
+## Sending Sonar Data to the Server Page
+- Our sonar data is being written to the standard output stream. Now, we must bring this data into our main Python program, "app.py".
+- To get our sonar data into the Python program we will use a pipe. Pipes are used to pass information from one program to another. The information passed from one process through the pipe is held until accessed, so our program must read in data as fast as it is put into the pipe in order to prevent a backlog.
+- The line of code below imports elements from the subprocess module that we will be using.
+  ```
+   from subprocess import Popen, PIPE
+  ```
+- Now, we will open a pipe to the sonar executable file created earlier, and execute the file as a child process.
+ ```
+   p = Popen(['-u','sudo ./FilterVersion','-o0'], shell=True, stdout=PIPE, stdin=PIPE, bufsize = 0,)
+  ```
+ - When 'app.py' runs, it will now start the C++ code for the sonar. Next, we have to bring in data from the pipe at the same rate it is generated.
+ - A function is used to update a global value in 'app.py' with the latest sonar data. A thread is used to call this function once every 0.25 seconds, matching the rate at which data is put into the pipe by the child process.
+ ```
+   def getdisturbance():
+    #threading.Timer(0.25, getdisturbance).start()
+    while True:
+        global disturbance_count
+        disturbance_count = str(p.stdout.readline())
+        #print("ThreadRun  " + disturbance_count)
+        
+        time.sleep(0.25)
+    
+disturbancethread = threading.Thread(target=getdisturbance)
+disturbancethread.start()
+  ```
+  - Now that we have the disturbance count being piped into our Python program, we can edit the 'index.html' file to display this data using a gauge graphic.
+  - To make our gauge graphic, we wil use a Javascript plugin called 'JustGage.' This plugin uses a Javascript library called 'Raphael.' You can find both of these files at the JustGage github page: https://toorshia.github.io/justgage/
+  - After downloading the both and placing these files in the 'js' folder of the file structure, we can add a gauge to our server page.
+  - Add the following lines to the body of the 'index.html' file. This code will create a new gauge graphic. The graphic takes in the disturbance count value fed in from the 'app.py' Python program, and then draws a gauge graphic to give the parent a visual representation of how active the child is.
+
+<p align="center">
+  <img src="https://github.com/ECE4180-Project/Baby-Monitor/blob/0d4748b0026c3e64751569f518b802241e89b70f/gauge.JPG" width=50% height=50% >
+</p>
+
 ## Starting the Server
 - Flask is used to create the server.
 - Flask is a Python module that makes developing web applications simple and easy.
@@ -167,9 +207,103 @@ flask run --cert=cert.pem --key=key.pem
 - To stream audio from the Parent's device to the baby monitor, a modified version of AddPipe's simplerecorder application developed using Matt Diamond's recorder.js Javascript Plugin. You can find AddPipe's application at the following link: https://github.com/addpipe/simple-recorderjs-demo
 - The Javascript code used for recording audio from the parent and sending to the monitor can be found in the "app.js" file.
 - With "app.js" in the javascript file directory, we can add functions and app routes to the main Python program "app.py."
-	
-## Video Demo
-ggg
+	- We will modify the "/" app route to include 'POST' and 'GET' methods to allow for data to be sent to and from the server.
+	- A new app route called "save_audio" is added. The function attached to this route will request audio data files, modify the file name, save the file in a folder, and then start a thread that plays the audio file using the pygame library.
+     ```
+	@app.route('/save_audio/', methods=["POST"])
+	def save_audio():
 
-## Presentation
-ggg
+    	file = request.files['audio_data']
+    	filename = datetime.now().strftime("%m-%d-%Y-%H-%M-%S") + '.wav'
+
+    	file.save(os.path.join(BASE_DIR, filename))
+    	filepath = '/home/pi/Desktop/simplerecorderwithgage/Audio_Files/' + str(filename)
+    	music_thread = threading.Thread(target=play_music, args=([filepath]))
+    	music_thread.start()
+    
+    	print(BASE_DIR + filename)
+
+   	 return jsonify({"status": True})
+
+	def play_music(pathid):
+    		my_sound = pygame.mixer.Sound(pathid)
+    		my_sound.play()
+ 	 ```
+- Next, we will modify the HTML page to include the audio controls.
+	- In the body of the HTML page, include the following lines to add in controls for recording and sending audio.
+  ```
+    <div id="controls">
+  	 <button id="recordButton">Record</button>
+  	 <button id="pauseButton" disabled>Pause</button>
+  	 <button id="stopButton" disabled>Stop</button>
+    </div>
+    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+  	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  ```
+- Now, our server has the ability to stream audio from the user to the Pi monitor!
+- To make our page look nicer, we can include a CSS file. For this project, we used a modified version of the CSS file found in AddPipe's project. 
+	- Save your CSS file in a folder called "css" within the "static" folder in the file structure.
+	- Make sure your CSS file is called "style."	
+## Sending Audio from the Pi Monitor to the Parent's Device
+- To stream live audio from the Pi Monitor to the parent's device, we first have to create a header.
+- The function below is included in "app.py". This function creates the header. The header contains important information about the audio data that we are transferring, such as the size, file type, etc.
+    ```
+	def genHeader(sampleRate, bitsPerSample, channels):
+    		datasize = 2000*10**6
+    		o = str('RIFF').encode('ascii')                                               # (4byte) Marks file as RIFF
+    		o += to_bytes((datasize + 36),4,'little')                                     # (4byte) File size in bytes excluding this and RIFF marker
+    		o += str('WAVE').encode('ascii')                                              # (4byte) File type
+    		o += str("fmt ").encode('ascii')                                              # (4byte) Format Chunk Marker  
+    		o += to_bytes(16,4,'little')                                                  # (4byte) Length of above format data 
+    		o += to_bytes(1, 2, 'little')                                                 # (2byte) Format type (1 - PCM)
+    		o += to_bytes(channels,2,'little')                                            # (2byte)
+    		o += to_bytes(sampleRate,4,'little')                                          # (4byte)
+    		o += to_bytes((sampleRate * channels * bitsPerSample // 8),4,'little')        # (4byte)
+    		o += to_bytes((channels * bitsPerSample //8),2, 'little')                     # (2byte)
+    		o += to_bytes(bitsPerSample, 2, 'little')                                     # (2byte)
+    		o += str('data').encode('ascii')                                              # (4byte) Data Chunk Marker
+    		o += to_bytes(datasize, 4, 'little')                                          # (4byte) Data size in bytes
+    		return o
+
+  ```
+- After the header is created, we can start our audio stream using the 'audio' route. This route opens a stream from the Pi's USB microphone, attaches the generated header to the first chunk of the stream, and starts continously passing chunks of data to the server page for it to play as audio.
+   ```
+   @app.route('/audio')
+   def audio():
+    # start Recording
+    def sound():
+
+        CHUNK = 8192
+        sampleRate = 44100
+        bitsPerSample = 16
+        channels = 1
+        wav_header = genHeader(sampleRate, bitsPerSample, channels)
+
+        stream = audio1.open(format=FORMAT, channels=CHANNELS,
+                        rate=RATE, input=True,input_device_index=2,
+                        frames_per_buffer=CHUNK)
+        print("recording...")
+        #frames = []
+        first_run = True
+        while True:
+           if first_run:
+               data = wav_header + stream.read(CHUNK)
+               first_run = False
+           else:
+               data = stream.read(CHUNK)
+           yield(data)
+
+    return Response(sound())
+
+  ```
+- Next, we must add code to the HTML file to display audio controls and allow for the parent to listen in on their baby.
+- Add in the following lines. This will retrieve data from the 'audio' route, and allow the parent to hear their baby throughout the night!
+   ```
+    <audio controls>
+        <source src="{{ url_for('audio') }}" type="audio/x-wav;codec=pcm">
+        Your browser does not support the audio element.
+    </audio>
+
+  ```
+  
+
