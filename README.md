@@ -59,6 +59,10 @@ flask run --cert=cert.pem --key=key.pem
 <p align="center">
   <img src="https://github.com/ECE4180-Project/Baby-Monitor/blob/420617f118cf526631bc26cf15c79aee5247c440/arduino-ultrasonic-distance-sensor4.png" width=50% height=50% >
 </p>
+<p align="center">
+  HCSR04 Timing Diagram from  https://www.javatpoint.com/arduino-ultrasonic-distance-sensor
+</p>
+
 
 | Sonar  | Raspberry pi |
 | ------------- | ------------- |
@@ -70,7 +74,6 @@ flask run --cert=cert.pem --key=key.pem
 - For the Pi to operate the sonar, a custom class called "sonar" was made that utilizes the PIGPIO library (http://abyz.me.uk/rpi/pigpio/). This class takes in an integer number for the sonar's trigger pin, an integer number for the sonar's echo pin, and if desired, a long integer number that represents the desired timeout delay for the sonar.
 - Within the class is a function called "distance." the distance function will return the distance from the sonar to an object.
     - The distance function starts by storing the current number of microseconds since system boot in the "trackTick" variable.
-
     - Next, the PIGPIO library is used to set the GPIO level on the trigger pin to LOW for two microseconds. Then, the GPIO level on the trigger pin is set high for 10 microseconds, and then set LOW again. This creates the ultrasonic pulse.
     - The receiver portion of the HC-SR04 then waits for the ultrasonic pulse to bounce back. When the sensor detects the beginning of the waveform returning to the sensor, the PIGPIO libary will read a high value on the echo pin, and the program will mark the current time in microseconds since system boot.
     - After the entire waveform has returned to the sonar, the PIGPIO library will read a low value on the echo pin, and the program will once again mark the time since system boot. 
@@ -121,6 +124,12 @@ int sonar::distance()
 - The loop starts by shifting all data array values down by one place to make room for the newest data value.
 - An instance of the sonar class is used to determine the current distance the baby is from the sensor. This new data value is then added to the data array.
 - The average value of the length 100 data array is calculated. This average value is used along with the 100 data values to calculate the current standard deviation of the 100 distance data values.
+<p align="center">
+  <img src="https://github.com/ECE4180-Project/Baby-Monitor/blob/e700ed8024377659e5ff1ae42fa3679e5c16c1c7/average.JPG" width=50% height=50% >
+</p>
+<p align="center">
+	Formula for Calculating the Average
+</p>
 - Next, the current distance value is analyzed. if the current distance is greater than the current mean plus two times the standard deviation, or less than the mean minus two times the standard deviation, a disturbance count variable is incremented by one.
 - This disturbance count value is then written to the standard output stream, and the data measurement and analysis process starts again.
 - This process is completed once every 0.25 seconds indefinitely.
