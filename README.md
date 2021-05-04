@@ -29,8 +29,16 @@ ggg
 - Connect a USB keyboard and mouse to the Pi.
 - Attach a speaker to the Pi through the 2.1mm headphone jack.
 
+<p align="center">
+  <img src="https://github.com/ECE4180-Project/Baby-Monitor/blob/b9081051db8c2454694235fefee88f3ce7e8a243/PiWiringDiagram.JPG" width=100% height=100% >
+</p>
+<p align="center">
+  Wiring Diagram
+</p>
+
 ## Camera, Recorder & Server Setup 
 - To setup the camera first user must enable it on the Pi by going to **Preferences->Raspberry Pi Configuration-> Interfaces**, then reboot the Pi
+- Connect the Pi to the local area network that you want to use the monitor on.
 - Next, download these modules in order to run the camera, recorder, and server.
 ```
 sudo apt-get install python3-flask
@@ -44,10 +52,31 @@ openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout -key.pem -days 3
 ```
 - When the Secure Sockets Layer is generated, run the server using the command below.
 ```
-flask run --cert=cert.pem --key=key.pem
+flask run --cert=cert.pem --key=key.pem --host=0.0.0.0
 ```
-- Copy and paste the generated hyperlink into your web browser, and watch your baby in real time!
+- Hover the Pi's pointer over the internet connection logo in the toolbar. The IP address for the Pi should appear.
+- On another device connected to the same local area network, such as a laptop or smartphone, go to the web browser, and type in the Pi's IP address followed by the port number 5000 as shown in the example below.
+```
+https://10.136.0.186:5000/
+```
+- Ignore any warnings the browser brings up about the connection being unsafe. Continue to the website.
+- Your web browser should bring up the page shown below. Now you can begin using your new baby monitor!
 
+<p align="center">
+  <img src="https://github.com/ECE4180-Project/Baby-Monitor/blob/f36eec5f5bcfc181cdca8aa1eb4bd89dbe4253fb/Screenshot%20from%202021-05-03%2021-06-15.png" width=100% height=100% >
+</p>
+
+- At the top of the page are audio controls to speak to the baby. When you want to say something, press record, speak your message, and then hit stop. 
+- Hitting stop automatically plays the message for the baby on the monitor's speaker. 
+- After you hit record, you can also speak, hit pause to think about what you are going to say next, and then continue speaking by hitting record again.
+- Below the three control buttons is a live video feed from the monitor. 
+- If you scroll down to the bottom of the page, you will find a gauge graphic labeled "Baby's Movement"
+- This graphic shows you how active your baby has been throughout the night by displaying the number of large movements that have occured throughout the night.
+<p align="center">
+  <img src="https://github.com/ECE4180-Project/Baby-Monitor/blob/f36eec5f5bcfc181cdca8aa1eb4bd89dbe4253fb/Screenshot%20from%202021-05-03%2021-09-09.png" width=100% height=100% >
+</p>
+
+- At the very bottom of the page is another set of audio controls. These controls are for sound being fed from the monitor's USB microphone to the server page. Pressing the 'play' button play audio from the monitor on your device.
 
 ## Sonar Detection
 <p align="center">
