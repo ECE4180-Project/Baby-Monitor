@@ -11,12 +11,13 @@ ggg
 ggg
 ## Parts
 - Raspberry Pi 3 
-- MicroUSB cable
+- MicroUSB cable and wall adapter
 - Monitor or display with appropriate cables to connect to the Pi
-- Raspberry Pi NoIR Camera V2
+- Raspberry Pi NoIR Camera V2 with ribbon cable
 - HC-SR04 Sonar Sensor
 - USB Microphone
 - Speaker with 2.1mm jack input 
+- Male to female jumper wires
 
 # How It Works
 
