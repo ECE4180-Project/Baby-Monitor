@@ -20,6 +20,29 @@ ggg
 - Male to female jumper wires
 
 # How It Works
+## File Structure
+- For reference, the file structure of the provided files is shown below.
+```
+ ├── Desktop
+       ├── app.py
+       ├── camera_pi.py
+       ├── FilterVersion.cpp
+       ├── FilterVersion
+       ├── cert.pem
+       ├── key.pem
+       ├── Pi_Monitor_4180
+               ├── templates
+	       |    └── index.html
+               ├── Audio_Files
+	       └── Static
+	       	    ├── css
+		    |	 └── style.css   
+		    └── js
+		    	 ├── app.js
+			 ├── justgage.js
+			 └── raphael-2.1.4.min.js 
+
+```
 
 ## Setting Up the Hardware
 - Connect the HC-SR04 Sonar Sensor to the Raspberry Pi 3
@@ -38,9 +61,9 @@ ggg
 </p>
 
 ## Camera, Recorder & Server Setup 
+- Connect the Pi to the local area network with internet access that you want to use the monitor on.
 - Download the files and save onto the Pi's desktop.
 - To setup the camera first user must enable it on the Pi by going to **Preferences->Raspberry Pi Configuration-> Interfaces**, then reboot the Pi
-- Connect the Pi to the local area network that you want to use the monitor on.
 - Next, download these modules in order to run the camera, recorder, and server.
 ```
 sudo apt-get install python3-flask
@@ -223,7 +246,7 @@ disturbancethread.start()
 		os.makedirs(BASE_DIR)
 	app.run(host = '0.0.0.0', ssl_context=('cert.pem', 'key.pem'), debug = False)
   ```
-- Flask applications use a file structure to organize different files. The figure below shows the file structure for our project.
+- Flask applications use a specific file structure to organize different files. See the file structure at the top of the page.
 ## Streaming the Camera
 - To stream the camera, we will be using Marcelo Rovai's camera class. This class can be found on his GitHub at https://github.com/Mjrovai/Video-Streaming-with-Flask/blob/master/camWebServer/camera_pi.py
 - We also implement several app routes and functions in "app.py" that Marcelo has developed for streaming a Pi camera to a server.
