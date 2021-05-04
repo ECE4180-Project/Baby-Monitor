@@ -2,7 +2,7 @@
 ######  by Erobhosele Sado, Sidney Wise, Jack Darrow, and  Ben Nixon  
 
 ## Summary
-A high-end baby monitor for worried parents. The monitor will stream a feed of the baby, check in on its movements, listen out for cries, and allow parents to speak to their child.
+Do you worry about not being able to hear or speak to your baby through a traditional baby monitor at night? want to live stream video of you child from any of your devices? Try building our Raspberry Pi-based baby monitor! This baby monitor allows for parents to view a live video stream of their child over a local area network. This monitor also allows worrying parents to listen in and talk to their baby over any device on the same network!
 
 ## Video Demo
 ggg
