@@ -23,24 +23,25 @@ ggg
 ## File Structure
 - For reference, the file structure of the provided files is shown below.
 ```
- ├── Desktop
-       ├── app.py
-       ├── camera_pi.py
-       ├── FilterVersion.cpp
-       ├── FilterVersion
-       ├── cert.pem
-       ├── key.pem
-       ├── Pi_Monitor_4180
-               ├── templates
-	       |    └── index.html
-               ├── Audio_Files
-	       └── Static
-	       	    ├── css
-		    |	 └── style.css   
-		    └── js
-		    	 ├── app.js
-			 ├── justgage.js
-			 └── raphael-2.1.4.min.js 
+    ├── Desktop
+       ├── code
+            ├── app.py
+            ├── camera_pi.py
+            ├── FilterVersion.cpp
+            ├── FilterVersion
+            ├── cert.pem
+            ├── key.pem
+            ├── Pi_Monitor_4180
+            ├── templates
+	    |    └── index.html
+            ├── Audio_Files
+	    └── Static
+	       	 ├── css
+		 |    └── style.css   
+		 └── js
+		      ├── app.js
+		      ├── justgage.js
+		      └── raphael-2.1.4.min.js 
 
 ```
 
