@@ -60,6 +60,17 @@ ggg
   Wiring Diagram
 </p>
 
+
+- Below is a table of connections between the HC-SR04 and the Raspberry Pi.
+
+| Sonar  | Raspberry pi |
+| ------------- | ------------- |
+| Vcc  | 5V |
+| Gnd | Gnd |
+| trig | pin 14 |
+| echo | pin 15  |
+
+
 ## Camera, Recorder & Server Setup 
 - Connect the Pi to the local area network with internet access that you want to use the monitor on.
 - Download the files and save onto the Pi's desktop.
@@ -69,13 +80,14 @@ ggg
 sudo apt-get install python3-flask
 sudo apt-get install pydub
 sudo apt-get install pyaudio
+sudo apt-get install openssl
 
 ```
-- After installation is complete, generate a Secure Socket Layer (SSL). Type in the line below, and follow the instructions.
+- After installation is complete, create a SSL certificate and key using openssl. Type in the line below, and follow the instructions.
 ```
 openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout -key.pem -days 365
 ```
-- When the Secure Sockets Layer is generated, run the server using the command below.
+- When the SSL certificate and key are generated, run the server using the command below.
 ```
 flask run --cert=cert.pem --key=key.pem --host=0.0.0.0
 ```
@@ -123,12 +135,6 @@ https://10.136.0.186:5000/
 </p>
 
 
-| Sonar  | Raspberry pi |
-| ------------- | ------------- |
-| Vcc  | 5V |
-| Gnd | Gnd |
-| trig | pin 14 |
-| echo | pin 15  |
 
 - For the Pi to operate the sonar, a custom class called "sonar" was made that utilizes the PIGPIO library (http://abyz.me.uk/rpi/pigpio/). This class takes in an integer number for the sonar's trigger pin, an integer number for the sonar's echo pin, and if desired, a long integer number that represents the desired timeout delay for the sonar.
 - Within the class is a function called "distance." the distance function will return the distance from the sonar to an object.
@@ -359,5 +365,6 @@ disturbancethread.start()
     </audio>
 
   ```
-  
+## Future Work
+- Building a case to house the Pi, sonar, and camera would be a great addition to the project.
 
