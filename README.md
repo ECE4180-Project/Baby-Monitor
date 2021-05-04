@@ -38,6 +38,7 @@ ggg
 </p>
 
 ## Camera, Recorder & Server Setup 
+- Download the files and save onto the Pi's desktop.
 - To setup the camera first user must enable it on the Pi by going to **Preferences->Raspberry Pi Configuration-> Interfaces**, then reboot the Pi
 - Connect the Pi to the local area network that you want to use the monitor on.
 - Next, download these modules in order to run the camera, recorder, and server.
