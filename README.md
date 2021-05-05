@@ -12,7 +12,9 @@ https://www.youtube.com/watch?v=SIyJqpgRfIs
 
 ## Presentation
 
+[![ Presentation](https://img.youtube.com/vi/N9WD8GG3MUE/maxresdefault.jpg)](https://www.youtube.com/embed/N9WD8GG3MUE) </br>
 
+https://www.youtube.com/watch?v=N9WD8GG3MUE
 
 ## Parts
 - Raspberry Pi 3 
