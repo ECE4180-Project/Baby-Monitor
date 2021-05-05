@@ -30,7 +30,7 @@ https://www.youtube.com/watch?v=N9WD8GG3MUE
 
 # How It Works
 ## File Structure
-- For reference, the file structure of the provided files is shown below.
+- For reference, the file structure is shown below.
 ```
     ├── Desktop
        ├── code
