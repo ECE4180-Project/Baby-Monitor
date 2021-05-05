@@ -376,5 +376,8 @@ disturbancethread.start()
 
   ```
 ## Future Work
-- Building a case to house the Pi, sonar, and camera would be a great addition to the project.
+- There are several great ideas that we did not have time to implement
+	- Building a case to house the Pi, sonar, and camera would be a great addition to the project.
+	- Adding in a temperature sensor that operates alongside the sonar.
+	- Prerecorded sounds and melodies that could be played by the parent.
 
