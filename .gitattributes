@@ -1,1 +1,2 @@
-
+*.js linguist-detectable=false
+# We don't want the number of large javascript libraries included in the files to give the impression that the code we wrote was mostly Javascript. 
