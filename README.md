@@ -4,11 +4,16 @@
 ## Summary
 Do you worry about not being able to hear or speak to your baby through a traditional baby monitor at night? want to live stream video of you child from any of your devices? Try building our Raspberry Pi-based baby monitor! This baby monitor allows for parents to view a live video stream of their child over a local area network. This monitor also allows worrying parents to listen in and talk to their baby over any device on the same network!
 
-## Video Demo
-ggg
+## Video Demonstration
+
+[![ Video Demonstration](https://img.youtube.com/vi/SIyJqpgRfIs/maxresdefault.jpg)](https://www.youtube.com/embed/SIyJqpgRfIs) </br>
+
+https://www.youtube.com/watch?v=SIyJqpgRfIs
 
 ## Presentation
-ggg
+
+
+
 ## Parts
 - Raspberry Pi 3 
 - MicroUSB cable and wall adapter
