@@ -4,6 +4,10 @@
 ## Summary
 Do you worry about not being able to hear or speak to your baby through a traditional baby monitor at night? want to live stream video of you child from any of your devices? Try building our Raspberry Pi-based baby monitor! This baby monitor allows for parents to view a live video stream of their child over a local area network. This monitor also allows worrying parents to listen in and talk to their baby over any device on the same network!
 
+<p align="center">
+  <img src="https://github.com/ECE4180-Project/Baby-Monitor/blob/82f1b7d4552be3f108e9d4ff8998643f9644ffcf/monitor.JPG" width=60% height=60% >
+</p>
+
 ## Video Demonstration
 
 [![ Video Demonstration](https://img.youtube.com/vi/SIyJqpgRfIs/hqdefault.jpg)](https://www.youtube.com/embed/SIyJqpgRfIs) </br>
@@ -29,6 +33,13 @@ https://www.youtube.com/watch?v=N9WD8GG3MUE
 - Male to female jumper wires
 
 # How It Works
+## Block Diagram
+
+<p align="center">
+  <img src="https://github.com/ECE4180-Project/Baby-Monitor/blob/8d8d51cf6e33146298be55a935a2896a21d9d9df/block_diagram.JPG" width=70% height=70% >
+</p>
+
+
 ## File Structure
 - For reference, the file structure is shown below.
 ```
