@@ -51,7 +51,6 @@ https://www.youtube.com/watch?v=N9WD8GG3MUE
             ├── FilterVersion
             ├── cert.pem
             ├── key.pem
-            ├── Pi_Monitor_4180
             ├── templates
 	    |    └── index.html
             ├── Audio_Files
@@ -283,7 +282,7 @@ disturbancethread.start()
   ```
 - Changing the percentage value in the line above will adjust the size of the video window on the server page.
 ## Sending Audio from the Parent's Device to the Baby Monitor
-- To stream audio from the Parent's device to the baby monitor, a modified version of AddPipe's simplerecorder application developed using Matt Diamond's recorder.js Javascript Plugin. You can find AddPipe's application at the following link: https://github.com/addpipe/simple-recorderjs-demo
+- To stream audio from the Parent's device to the baby monitor, a modified version of Pipe's simplerecorder application developed using Matt Diamond's recorder.js Javascript Plugin. You can find Pipe's application at the following link: https://github.com/addpipe/simple-recorderjs-demo
 - The Javascript code used for recording audio from the parent and sending to the monitor can be found in the "app.js" file.
 - With "app.js" in the javascript file directory, we can add functions and app routes to the main Python program "app.py."
 	- We will modify the "/" app route to include 'POST' and 'GET' methods to allow for data to be sent to and from the server.
@@ -319,13 +318,13 @@ disturbancethread.start()
     <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
   	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
   ```
-- Now, our server has the ability to stream audio from the user to the Pi monitor!
-- To make our page look nicer, we can include a CSS file. For this project, we used a modified version of the CSS file found in AddPipe's project. 
+- Now, our server has the ability to stream audio from the user to the baby monitor!
+- To make our page look nicer, we can include a CSS file. For this project, we used a modified version of the CSS file found in Pipe's project. 
 	- Save your CSS file in a folder called "css" within the "static" folder in the file structure.
 	- Make sure your CSS file is called "style."	
-## Sending Audio from the Pi Monitor to the Parent's Device
+## Sending Audio from the Baby Monitor to the Parent's Device
 - For streaming audio from the baby monitor to the parent used a slightly modified version of Ryanbekabe’s Python audio streaming library, found at https://gist.github.com/ryanbekabe/0a2c840134f9b7dfb635429e5e17c6ed
-- To stream live audio from the Pi Monitor to the parent's device, we first have to create a header.
+- To stream live audio from the baby monitor to the parent's device, we first have to create a header.
 - The function below is included in "app.py". This function creates the header. The header contains important information about the audio data that we are transferring, such as the size, file type, etc.
     ```
 	def genHeader(sampleRate, bitsPerSample, channels):
