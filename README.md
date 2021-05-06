@@ -55,7 +55,7 @@ https://www.youtube.com/watch?v=N9WD8GG3MUE
             ├── templates
 	    |    └── index.html
             ├── Audio_Files
-	    └── Static
+	    └── static
 	       	 ├── css
 		 |    └── style.css   
 		 └── js
@@ -67,11 +67,12 @@ https://www.youtube.com/watch?v=N9WD8GG3MUE
 
 ## Setting Up the Hardware
 - Connect the HC-SR04 Sonar Sensor to the Raspberry Pi 3
-    - The HC-SR04 is powered using the Arduino Uno's 5V and GND pins, and operates using two GPIO pins. The two GPIO pins used in this process are GPIO pins 14 and 15.
+    - The HC-SR04 is powered using the Arduino Uno's 5V and GND pins, and operates using two GPIO pins. The two PIGPIO outputs used in this process are GPIO pins 14 and 15. These correspond to pins 8 and 10 on the Raspberry Pi 3.
     - The schematic below shows how to connect the HC-SR04 sensor using male to female dual head jumper wires.
 - Connect the Raspberry Pi to a monitor or display. For this instance, the Pi was connected to a monitor using HDMI.
-- Plug the USB microphone into the Pi.
 - Connect a USB keyboard and mouse to the Pi.
+	- The mouse, keyboard, and display are only needed during the setup process. After the monitor is up and running, you can disconnect them.
+- Plug the USB microphone into the Pi.
 - Attach a speaker to the Pi through the 2.1mm headphone jack.
 
 <p align="center">
@@ -88,8 +89,8 @@ https://www.youtube.com/watch?v=N9WD8GG3MUE
 | ------------- | ------------- |
 | Vcc  | 5V |
 | Gnd | Gnd |
-| trig | pin 14 |
-| echo | pin 15  |
+| trig | pin 10 |
+| echo | pin 8  |
 
 
 ## Camera, Recorder & Server Setup 
@@ -104,7 +105,7 @@ sudo apt-get install pyaudio
 sudo apt-get install openssl
 
 ```
-- After installation is complete, create a SSL certificate and key using openssl. Type in the line below, and follow the instructions.
+- After installation is complete, enter the code folder from the command line and create a SSL certificate and key using openssl. Type in the line below, and follow the instructions.
 ```
 openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout -key.pem -days 365
 ```
@@ -236,12 +237,9 @@ https://10.136.0.186:5000/
  - A function is used to update a global value in 'app.py' with the latest sonar data. A thread is used to call this function once every 0.25 seconds, matching the rate at which data is put into the pipe by the child process.
  ```
    def getdisturbance():
-    #threading.Timer(0.25, getdisturbance).start()
     while True:
         global disturbance_count
         disturbance_count = str(p.stdout.readline())
-        #print("ThreadRun  " + disturbance_count)
-        
         time.sleep(0.25)
     
 disturbancethread = threading.Thread(target=getdisturbance)
@@ -266,7 +264,7 @@ disturbancethread.start()
    app = Flask(__name__)
   ```
 - After the instantiation, various functions and app routes are implemented that will be discussed later.
-- At the end of "app.py," the server starts when teh following segment of code runs.
+- At the end of "app.py," the server starts when the following segment of code runs.
   ```
    if __name__=='__main':
    	if not os.path.exists(directory):
@@ -326,6 +324,7 @@ disturbancethread.start()
 	- Save your CSS file in a folder called "css" within the "static" folder in the file structure.
 	- Make sure your CSS file is called "style."	
 ## Sending Audio from the Pi Monitor to the Parent's Device
+- For streaming audio from the baby monitor to the parent used a slightly modified version of Ryanbekabe’s Python audio streaming library, found at https://gist.github.com/ryanbekabe/0a2c840134f9b7dfb635429e5e17c6ed
 - To stream live audio from the Pi Monitor to the parent's device, we first have to create a header.
 - The function below is included in "app.py". This function creates the header. The header contains important information about the audio data that we are transferring, such as the size, file type, etc.
     ```
